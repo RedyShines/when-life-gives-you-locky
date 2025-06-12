@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq2f7pqpexsae"]
+
+[ext_resource type="Script" uid="uid://dgawshh35jfgn" path="res://npc.gd" id="1_anlqg"]
+[ext_resource type="Script" uid="uid://dm3k8rhbfd0mh" path="res://npc_movement_data.gd" id="2_j3bbb"]
+
+[sub_resource type="Resource" id="Resource_70scj"]
+script = ExtResource("2_j3bbb")
+SPEED = 5.0
+ACCELERATION = 5.0
+AIR_ACCEL = 4.0
+FRICTION = 15.0
+metadata/_custom_type_script = "uid://dm3k8rhbfd0mh"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3bbb"]
+albedo_color = Color(1, 0.396078, 0.588235, 1)
+texture_filter = 0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_447n6"]
+material = SubResource("StandardMaterial3D_j3bbb")
+radius = 0.25
+height = 1.0
+radial_segments = 8
+rings = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wf4jm"]
+radius = 0.3
+height = 1.0
+
+[node name="NPC" type="CharacterBody3D"]
+collision_layer = 4
+floor_max_angle = 1.0472
+script = ExtResource("1_anlqg")
+movement_data = SubResource("Resource_70scj")
+
+[node name="NPCModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_447n6")
+
+[node name="FrontDetector" type="RayCast3D" parent="NPCModel" groups=["NPCGroup"]]
+target_position = Vector3(0, 0, -1)
+collision_mask = 6
+
+[node name="NPCHitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_wf4jm")
+
+[node name="Attribute detector" type="Area3D" parent="."]
+
+[node name="Detector" type="CollisionShape3D" parent="Attribute detector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_wf4jm")
+
+[node name="NPCNav" type="NavigationAgent3D" parent="."]
+debug_path_custom_color = Color(1, 0.286275, 0.47451, 1)

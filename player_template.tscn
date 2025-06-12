@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://wpnhs7t68gnw"]
+
+[ext_resource type="Script" uid="uid://b6rjoft0u6cci" path="res://player.gd" id="1_4k888"]
+[ext_resource type="Script" uid="uid://eimh2pa0cswa" path="res://player_movement_data.gd" id="2_87ptb"]
+
+[sub_resource type="Resource" id="Resource_wf4jm"]
+script = ExtResource("2_87ptb")
+SPEED = 7.0
+SPRINT_MULTIPLIER = 1.5
+MAX_SPRINT_MULTIPLIER = 2.7
+MAX_SPRINT_REQUIREMENT = 16.0
+FRICTION = 15.0
+SPRINT_FRICTION = 5.0
+AIR_RESISTANCE = 3.0
+SPRINT_AIR_RESISTANCE = 2.0
+ACCELERATION = 7.0
+SPRINT_ACCELERATION = 3.0
+MAX_ACCELERATION = 1.5
+AIR_ACCEL = 4.0
+SPRINT_AIR_ACCEL = 2.5
+MAX_AIR_ACCEL = 1.2
+metadata/_custom_type_script = "uid://bnj15jg4khtjv"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_84s3m"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wf4jm"]
+material = SubResource("StandardMaterial3D_84s3m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb68p"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yi47t"]
+material = SubResource("StandardMaterial3D_xb68p")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_503ot"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1keg0"]
+material = SubResource("StandardMaterial3D_503ot")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktumr"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b5p6e"]
+material = SubResource("StandardMaterial3D_ktumr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oh0u"]
+texture_filter = 0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_447n6"]
+material = SubResource("StandardMaterial3D_5oh0u")
+radius = 0.15
+height = 0.6
+radial_segments = 8
+rings = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wf4jm"]
+radius = 0.2
+height = 0.6
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+floor_max_angle = 1.0472
+script = ExtResource("1_4k888")
+movement_data = SubResource("Resource_wf4jm")
+
+[node name="NESW" type="Node3D" parent="."]
+
+[node name="West" type="MeshInstance3D" parent="NESW"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1, 0.815, 0)
+mesh = SubResource("BoxMesh_wf4jm")
+skeleton = NodePath("../../PlayerModel")
+
+[node name="East" type="MeshInstance3D" parent="NESW"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1, 0.815, 0)
+mesh = SubResource("BoxMesh_yi47t")
+skeleton = NodePath("../../PlayerModel")
+
+[node name="North" type="MeshInstance3D" parent="NESW"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.815, -1)
+visible = false
+mesh = SubResource("BoxMesh_1keg0")
+skeleton = NodePath("../../PlayerModel")
+
+[node name="South" type="MeshInstance3D" parent="NESW"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.815, 1)
+visible = false
+mesh = SubResource("BoxMesh_b5p6e")
+skeleton = NodePath("../../PlayerModel")
+
+[node name="PlayerModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("CapsuleMesh_447n6")
+
+[node name="PlayerHitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CapsuleShape3D_wf4jm")
+
+[node name="springArmPivot" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="springArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35609, 0)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="springArmPivot/SpringArm3D"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://brpbx3wqvbg37"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3cce4"]
+
+[node name="NPCAttributeChanger" type="Area3D"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3cce4")
