@@ -28,11 +28,13 @@ const lerpVal = .17
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 func _process(_delta) -> void:
 	'''Runs stuff every frame.'''
 	
 	# Kills the game when the escape key is pressed.
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Input.is_action_just_pressed("escape"):
 		get_tree().quit()
 	
@@ -77,24 +79,27 @@ func handle_movement(delta) -> void:
 	if velocity.length() > 0 or velocity.length() < 0:
 		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), lerpVal)
 	
-	if sprinting == true:
-		# Sprint state
-		sprint_multiplier_increase += delta / 10
-		movement_controller(movement_data.SPEED * (movement_data.SPRINT_MULTIPLIER + sprint_multiplier_increase) \
-		,movement_data.SPRINT_ACCELERATION, \
-		movement_data.SPRINT_AIR_ACCEL, movement_data.SPRINT_FRICTION, movement_data.SPRINT_AIR_RESISTANCE, delta)
-	
-	elif max_sprinting == true:
-		# Max sprint state
-		sprint_multiplier_increase = 0
-		movement_controller(movement_data.SPEED * movement_data.MAX_SPRINT_MULTIPLIER, movement_data.MAX_ACCELERATION, movement_data.MAX_AIR_ACCEL, \
-				movement_data.SPRINT_FRICTION, movement_data.SPRINT_AIR_RESISTANCE, delta)
-	
-	elif walking == true:
-		# Walking state
-		sprint_multiplier_increase = 0
-		movement_controller(movement_data.SPEED ,movement_data.ACCELERATION, \
-		movement_data.AIR_ACCEL, movement_data.FRICTION, movement_data.AIR_RESISTANCE, delta)
+	if PlayerData.can_move == true:
+		if sprinting == true:
+			# Sprint state
+			sprint_multiplier_increase += delta / 10
+			movement_controller(movement_data.SPEED * (movement_data.SPRINT_MULTIPLIER + sprint_multiplier_increase) \
+			,movement_data.SPRINT_ACCELERATION, \
+			movement_data.SPRINT_AIR_ACCEL, movement_data.SPRINT_FRICTION, movement_data.SPRINT_AIR_RESISTANCE, delta)
+		
+		elif max_sprinting == true:
+			# Max sprint state
+			sprint_multiplier_increase = 0
+			movement_controller(movement_data.SPEED * movement_data.MAX_SPRINT_MULTIPLIER, movement_data.MAX_ACCELERATION, movement_data.MAX_AIR_ACCEL, \
+					movement_data.SPRINT_FRICTION, movement_data.SPRINT_AIR_RESISTANCE, delta)
+		
+		elif walking == true:
+			# Walking state
+			sprint_multiplier_increase = 0
+			movement_controller(movement_data.SPEED ,movement_data.ACCELERATION, \
+			movement_data.AIR_ACCEL, movement_data.FRICTION, movement_data.AIR_RESISTANCE, delta)
+	else:
+		velocity = Vector3(0,0,0)
 		
 	# Sets velocity.y back to vy
 	velocity.y = vy

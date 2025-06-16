@@ -1,0 +1,107 @@
+[gd_scene load_steps=2 format=3 uid="uid://baoyw5kf1fe5g"]
+
+[ext_resource type="Script" uid="uid://osqhrjdqur3p" path="res://produce_ui.gd" id="1_70d1v"]
+
+[node name="ProduceUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_70d1v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0, 0.0313726, 0.54902)
+
+[node name="CurrencyLbl" type="Label" parent="."]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 88.0
+offset_right = 1024.0
+offset_bottom = 120.0
+text = "Poor LMAO"
+
+[node name="LemonBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.007
+anchor_bottom = 0.012
+offset_left = 88.0
+offset_top = 88.0
+offset_right = 415.936
+offset_bottom = 192.224
+text = "Lemon"
+
+[node name="LimeBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.007
+anchor_bottom = 0.012
+offset_left = 88.0
+offset_top = 216.0
+offset_right = 415.936
+offset_bottom = 320.224
+text = "Lime"
+
+[node name="LeftBtn" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 800.0
+offset_top = 432.0
+offset_right = 896.0
+offset_bottom = 512.0
+text = "<"
+
+[node name="RightBtn" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 944.0
+offset_top = 432.0
+offset_right = 1040.0
+offset_bottom = 512.0
+text = ">"
+
+[node name="PurchaseLbl" type="Label" parent="."]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 136.0
+offset_right = 1024.0
+offset_bottom = 280.0
+text = ":)"
+
+[node name="QuantLbl" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 896.0
+offset_top = 432.0
+offset_right = 944.0
+offset_bottom = 512.0
+text = "X1"
+
+[node name="BuyBtn" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 800.0
+offset_top = 520.0
+offset_right = 1040.0
+offset_bottom = 576.0
+text = "BUY NOW!!!"
+
+[connection signal="pressed" from="LemonBtn" to="." method="_on_lemon_btn_pressed"]
+[connection signal="pressed" from="LemonBtn" to="." method="_on_item_btn_pressed"]
+[connection signal="pressed" from="LimeBtn" to="." method="_on_lime_btn_pressed"]
+[connection signal="pressed" from="LimeBtn" to="." method="_on_item_btn_pressed"]
+[connection signal="pressed" from="LeftBtn" to="." method="_on_left_btn_pressed"]
+[connection signal="pressed" from="RightBtn" to="." method="_on_right_btn_pressed"]
+[connection signal="pressed" from="BuyBtn" to="." method="_on_buy_btn_pressed"]

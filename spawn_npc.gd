@@ -8,7 +8,7 @@ func _process(_delta: float) -> void:
 	if randint == 50:
 		var new_npc = moving_npc.instantiate()
 		
-		for i in range(5):
+		for i in range(2):
 			new_npc = moving_npc.instantiate()
 			add_child(new_npc)
 			

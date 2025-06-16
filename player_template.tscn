@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://wpnhs7t68gnw"]
+[gd_scene load_steps=16 format=3 uid="uid://wpnhs7t68gnw"]
 
 [ext_resource type="Script" uid="uid://b6rjoft0u6cci" path="res://player.gd" id="1_4k888"]
 [ext_resource type="Script" uid="uid://eimh2pa0cswa" path="res://player_movement_data.gd" id="2_87ptb"]
@@ -59,6 +59,9 @@ rings = 2
 radius = 0.2
 height = 0.6
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_84s3m"]
+size = Vector3(1.5, 0.75, 1)
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 floor_max_angle = 1.0472
@@ -66,6 +69,7 @@ script = ExtResource("1_4k888")
 movement_data = SubResource("Resource_wf4jm")
 
 [node name="NESW" type="Node3D" parent="."]
+visible = false
 
 [node name="West" type="MeshInstance3D" parent="NESW"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1, 0.815, 0)
@@ -79,13 +83,11 @@ skeleton = NodePath("../../PlayerModel")
 
 [node name="North" type="MeshInstance3D" parent="NESW"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.815, -1)
-visible = false
 mesh = SubResource("BoxMesh_1keg0")
 skeleton = NodePath("../../PlayerModel")
 
 [node name="South" type="MeshInstance3D" parent="NESW"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.815, 1)
-visible = false
 mesh = SubResource("BoxMesh_b5p6e")
 skeleton = NodePath("../../PlayerModel")
 
@@ -100,7 +102,17 @@ shape = SubResource("CapsuleShape3D_wf4jm")
 [node name="springArmPivot" type="Node3D" parent="."]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="springArmPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35609, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 spring_length = 4.0
 
 [node name="Camera3D" type="Camera3D" parent="springArmPivot/SpringArm3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.375, 0)
+shape = SubResource("BoxShape3D_84s3m")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+target_position = Vector3(-1.5, 0, 0)
