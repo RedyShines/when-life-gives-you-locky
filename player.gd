@@ -189,3 +189,7 @@ func movement_controller(speed, acceleration, air_acceleration, friction, air_re
 func handle_timers(_delta) -> void:
 	'''Handles the timers that are used for the player.'''
 	pass
+
+
+func _on_interaction_area_exited(area: Area3D) -> void:
+	pass # Replace with function body.

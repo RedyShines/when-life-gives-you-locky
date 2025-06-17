@@ -98,10 +98,10 @@ offset_right = 1040.0
 offset_bottom = 576.0
 text = "BUY NOW!!!"
 
-[connection signal="pressed" from="LemonBtn" to="." method="_on_lemon_btn_pressed"]
 [connection signal="pressed" from="LemonBtn" to="." method="_on_item_btn_pressed"]
-[connection signal="pressed" from="LimeBtn" to="." method="_on_lime_btn_pressed"]
+[connection signal="pressed" from="LemonBtn" to="." method="_on_lemon_btn_pressed"]
 [connection signal="pressed" from="LimeBtn" to="." method="_on_item_btn_pressed"]
+[connection signal="pressed" from="LimeBtn" to="." method="_on_lime_btn_pressed"]
 [connection signal="pressed" from="LeftBtn" to="." method="_on_left_btn_pressed"]
 [connection signal="pressed" from="RightBtn" to="." method="_on_right_btn_pressed"]
 [connection signal="pressed" from="BuyBtn" to="." method="_on_buy_btn_pressed"]

@@ -4,7 +4,7 @@ extends Node3D
 var randint
 
 func _process(_delta: float) -> void:
-	randint = randi_range(1,200)
+	randint = randi_range(1,400)
 	if randint == 50:
 		var new_npc = moving_npc.instantiate()
 		

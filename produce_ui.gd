@@ -7,7 +7,7 @@ var quant_buy = -1
 var item
 var purchase_text = "Now Purchasing: "
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$CurrencyLbl.text = str(PlayerData.currency)
 	
 	if quant_buy <= 0:

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://1p6ojiivoq2"
+path="res://.godot/imported/cozy sidewalk v2.ogg-032fe2fbdbc631705b9d89627f43eb1f.oggvorbisstr"
+
+[deps]
+
+source_file="res://cozy sidewalk v2.ogg"
+dest_files=["res://.godot/imported/cozy sidewalk v2.ogg-032fe2fbdbc631705b9d89627f43eb1f.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

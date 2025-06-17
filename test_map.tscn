@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dv204bme2o3g0"]
+[gd_scene load_steps=25 format=3 uid="uid://dv204bme2o3g0"]
 
 [ext_resource type="PackedScene" uid="uid://wpnhs7t68gnw" path="res://player_template.tscn" id="1_4qc02"]
 [ext_resource type="Script" uid="uid://l4emamlxejqi" path="res://spawn_npc.gd" id="1_qgarv"]
@@ -8,6 +8,8 @@
 [ext_resource type="Shader" uid="uid://d04q6lujvbey4" path="res://day_nightcycle.gdshader" id="2_4wuf8"]
 [ext_resource type="PackedScene" uid="uid://brpbx3wqvbg37" path="res://npc_attribute_changer.tscn" id="6_r0pc2"]
 [ext_resource type="PackedScene" uid="uid://baoyw5kf1fe5g" path="res://produce_ui.tscn" id="8_gqtbx"]
+[ext_resource type="AudioStream" uid="uid://1p6ojiivoq2" path="res://cozy sidewalk v2.ogg" id="9_bu3ac"]
+[ext_resource type="PackedScene" uid="uid://d26506sapd4xe" path="res://interactable.tscn" id="10_5354r"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_eflb2"]
 size = Vector3(100, 3, 100)
@@ -186,7 +188,23 @@ shape = SubResource("BoxShape3D_gqtbx")
 [node name="Control" parent="." instance=ExtResource("8_gqtbx")]
 visible = false
 
+[node name="Interactable" parent="." instance=ExtResource("10_5354r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.971, -0.140959, -22.8802)
+
+[node name="Interactable2" parent="." instance=ExtResource("10_5354r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.971, -0.140959, -22.8802)
+
+[node name="Interactable3" parent="." instance=ExtResource("10_5354r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.971, -0.140959, -22.8802)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_bu3ac")
+autoplay = true
+
 [connection signal="body_shape_entered" from="Store/MeshInstance3D/Area3D" to="." method="_on_area_3d_body_shape_entered"]
 [connection signal="body_shape_entered" from="Store/MeshInstance3D4/Area3D" to="." method="_on_area_3d2_body_shape_entered"]
 
 [editable path="Targets/NPCAttributeChanger"]
+[editable path="Interactable"]
+[editable path="Interactable2"]
+[editable path="Interactable3"]

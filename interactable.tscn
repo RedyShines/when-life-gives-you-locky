@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d26506sapd4xe"]
+
+[ext_resource type="Script" uid="uid://bol2yqegf3fqa" path="res://interactable.gd" id="1_wh154"]
+[ext_resource type="Script" uid="uid://bge18vhap1eai" path="res://interaction_script_test.gd" id="2_jcy0q"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x3v40"]
+
+[node name="Interactable" type="Area3D"]
+collision_layer = 16
+collision_mask = 32
+script = ExtResource("1_wh154")
+
+[node name="InteractionScript" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_x3v40")
+script = ExtResource("2_jcy0q")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[connection signal="interacted" from="." to="InteractionScript" method="_on_interactable_interacted"]

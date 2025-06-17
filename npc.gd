@@ -80,7 +80,7 @@ func movement_controller(speed, acceleration, air_acceleration, delta) -> void:
 		velocity = lerp(velocity, speed * direction, air_acceleration * delta)
 
 
-func _on_attribute_detector_area_entered(area: Area3D) -> void:
+func _on_attribute_detector_area_entered(_area: Area3D) -> void:
 	movement_type = 0
 	target = store_marker
 	movement_data.SPEED = 2

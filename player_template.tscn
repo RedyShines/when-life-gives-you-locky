@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://wpnhs7t68gnw"]
+[gd_scene load_steps=17 format=3 uid="uid://wpnhs7t68gnw"]
 
 [ext_resource type="Script" uid="uid://b6rjoft0u6cci" path="res://player.gd" id="1_4k888"]
 [ext_resource type="Script" uid="uid://eimh2pa0cswa" path="res://player_movement_data.gd" id="2_87ptb"]
+[ext_resource type="Script" uid="uid://k6gn16givva7" path="res://player_interaction_area.gd" id="3_xb68p"]
 
 [sub_resource type="Resource" id="Resource_wf4jm"]
 script = ExtResource("2_87ptb")
@@ -55,12 +56,12 @@ height = 0.6
 radial_segments = 8
 rings = 2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_84s3m"]
+size = Vector3(3, 1, 1.5)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wf4jm"]
 radius = 0.2
 height = 0.6
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_84s3m"]
-size = Vector3(1.5, 0.75, 1)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -69,7 +70,6 @@ script = ExtResource("1_4k888")
 movement_data = SubResource("Resource_wf4jm")
 
 [node name="NESW" type="Node3D" parent="."]
-visible = false
 
 [node name="West" type="MeshInstance3D" parent="NESW"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1, 0.815, 0)
@@ -95,6 +95,21 @@ skeleton = NodePath("../../PlayerModel")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 mesh = SubResource("CapsuleMesh_447n6")
 
+[node name="InteractionArea" type="Area3D" parent="PlayerModel"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.3, 0)
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("3_xb68p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerModel/InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.375, 0)
+shape = SubResource("BoxShape3D_84s3m")
+
+[node name="InteractionRayCast" type="RayCast3D" parent="PlayerModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, 0, -3)
+collision_mask = 0
+
 [node name="PlayerHitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 shape = SubResource("CapsuleShape3D_wf4jm")
@@ -107,12 +122,4 @@ spring_length = 4.0
 
 [node name="Camera3D" type="Camera3D" parent="springArmPivot/SpringArm3D"]
 
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.375, 0)
-shape = SubResource("BoxShape3D_84s3m")
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-target_position = Vector3(-1.5, 0, 0)
+[connection signal="area_exited" from="PlayerModel/InteractionArea" to="." method="_on_interaction_area_exited"]
