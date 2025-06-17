@@ -10,10 +10,10 @@ collision_layer = 16
 collision_mask = 32
 script = ExtResource("1_wh154")
 
-[node name="InteractionScript" type="CollisionShape3D" parent="."]
+[node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_x3v40")
-script = ExtResource("2_jcy0q")
 
 [node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("2_jcy0q")
 
-[connection signal="interacted" from="." to="InteractionScript" method="_on_interactable_interacted"]
+[connection signal="interacted" from="." to="Collision" method="_on_interactable_interacted"]

@@ -1,5 +1,4 @@
-extends CollisionShape3D
-
+extends Node3D
 
 func _on_interactable_interacted(interactor: Interactor) -> void:
-	print("Hello I am " + str(self))
+	print("I am positioned at" + str(global_position))
